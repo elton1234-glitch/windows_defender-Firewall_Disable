@@ -1,0 +1,1 @@
+Copy this file to your microcontroller (tested on Raspberry Pi Pico) and rename this file as "Code.py". You can also copy the code from this repository and paste it directly to your code.py file in the microcontroller. Make sure to use it ethically and not on other's system as this can be ILLEGAL!!
